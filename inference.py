@@ -39,6 +39,7 @@ transform = transforms.Compose([
 preprocessed_image = transform(image).unsqueeze(0)
 
 # make the prediction
-output_features = model(preprocessed_image)
-print(output_features)
-print(output_features.shape)
+output_features = model.forward_features(preprocessed_image)
+for k,v in output_features.items():
+    if isinstance(v, torch.Tensor): print(k, v.shape)
+    else: print(k, v)
